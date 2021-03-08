@@ -1,0 +1,49 @@
+/* ========= Beranda ========== */
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked){
+	position: absolute;
+	left: -9999px;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+.radio-select:checked + label,
+.radio-select:not(:checked) + label{
+	position: relative;
+	display: inline-block;		  
+	font-weight: 600;
+	overflow: hidden;
+	cursor: pointer;	
+	background-color: rgba(255, 255, 255, .9);
+  	border: 1px solid rgba(209, 213, 219, 1);
+	-webkit-transition: all 300ms linear;
+	transition: all 300ms linear; 
+}
+.radio-select:not(:checked) + label{
+	background-color: none;	
+}
+.radio-select:checked + label{
+  	color: #fff;	
+	background-color: rgba(99, 102, 241, 1);
+}
+
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile + label * {
+    pointer-events: none;    
+}
+
+
