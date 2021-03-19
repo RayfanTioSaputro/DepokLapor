@@ -7,7 +7,6 @@ class Beranda extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // $this->load->model('auth');
     }
 
     public function index()
@@ -15,6 +14,6 @@ class Beranda extends CI_Controller
         $data['user'] = $this->db->get_where('masyarakat', [
             'username' => $this->session->userdata('username'),
         ])->row_array();
-        $this->load->view('beranda', $data);
+        $this->load->view('masyarakat/beranda', $data);
     }
 }

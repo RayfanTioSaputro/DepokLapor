@@ -1,4 +1,6 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
 class AuthModel extends CI_Model
 {
     public function __construct()
@@ -20,7 +22,7 @@ class AuthModel extends CI_Model
         $this->db->insert('masyarakat', $data);
     }
 
-    public function getByEmail($to)
+    public function getUserByEmail($to)
     {
         $query = $this->db->query("SELECT * FROM masyarakat WHERE email=" . "'" . $to . "'");
         return $query->result();
