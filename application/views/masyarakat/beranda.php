@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <?php $this->load->view('template/header') ?>
+    <?php $this->load->view('masyarakat/template/header') ?>
 
     <style>
         body {
@@ -159,49 +159,6 @@
                 </div>
             </div>
     </section>
-    <!-- <section class="w-full px-6 antialiased bg-white select-none">
-        <nav class="relative lg:z-0 z-50 h-24" x-data="{ showMenu: false }">
-            <div class="container relative flex flex-wrap items-center justify-between h-24 mx-auto font-medium border-b border-gray-200 lg:justify-center sm:px-4 md:px-2">
-                <a href="#_" class="w-1/4 py-4 pr-4 md:py-0">
-                    <span class="text-xl font-black leading-none text-gray-800 select-none logo">DepokLapor<span class="text-indigo-600">!</span></span>
-                </a>
-                <div class="top-0 left-0 items-start hidden w-full h-full p-4 text-sm bg-gray-900 bg-opacity-50 md:w-3/4 md:absolute lg:text-base md:h-auto md:bg-transparent md:p-0 md:relative md:flex" :class="{'flex fixed': showMenu, 'hidden': !showMenu }">
-                    <div class="flex-col w-full h-auto overflow-hidden bg-white rounded-lg select-none md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto">
-                        <a href="#_" class="inline-flex items-center block w-auto h-16 px-6 text-xl font-black leading-none text-gray-900 select-none md:hidden">DepokLapor<span class="text-indigo-600">.</span></a>
-                        <?php if ($this->session->userdata('status') != "login") { ?>
-                            <div class="flex flex-col items-start justify-center w-full text-center md:w-2/3 md:mt-0 md:flex-row md:items-center">
-                                <a href="#" class="inline-block w-full px-6 py-2 mx-0 font-medium text-left text-indigo-600 md:w-auto md:px-0 md:mx-2 lg:mx-3 md:text-center">Beranda</a>
-                                <a href="<?= site_url('tentang') ?>" class="inline-block w-full px-6 py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-indigo-600 lg:mx-3 md:text-center">Tentang</a>
-                            </div>
-                            <div class="border-t my-3"></div>
-                            <div class="flex flex-col items-start justify-end w-full md:items-center md:w-1/3 md:flex-row md:py-0">
-                                <a href="<?= site_url('auth') ?>" class="focus:outline-none w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto cursor-pointer" id="show-login-modal">Masuk</a>
-                                <a href="<?= site_url('auth/registration') ?>" class="inline-flex items-center w-full px-6 py-3 md:px-3 md:w-auto lg:px-5 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none md:rounded-md lg:ronded-md">Daftar</a>
-                            </div>
-                        <?php } else if ($this->session->userdata('status') == "login") { ?>
-                            <div class="flex flex-col items-start justify-center w-full text-center md:w-2/3 md:mt-0 md:flex-row md:items-center">
-                                <a href="#" class="inline-block w-full px-6 py-2 mx-0 font-medium text-left text-indigo-600 md:w-auto md:px-0 md:mx-2 lg:mx-3 md:text-center">Beranda</a>
-                                <a href="<?= site_url('tentang') ?>" class="inline-block w-full px-6 py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-indigo-600 lg:mx-3 md:text-center">Tentang</a>
-                            </div>
-                            <div class="border-t my-3"></div>
-                            <div class="flex flex-col items-start justify-end w-full md:items-center md:w-1/3 md:flex-row md:py-0" x-data="{ open: false }">
-                                <a href="<?= site_url('auth/logout') ?>"><?= $user['nama'] ?></a>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div @click=" showMenu=!showMenu" class="fixed right-0 mr-6 flex flex-col items-center items-end justify-center w-10 h-10 bg-gray-100 rounded-full cursor-pointer md:hidden hover:bg-gray-100">
-                    <svg class="w-6 h-6 text-gray-700" x-show="!showMenu" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" x-cloak>
-                        <path d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <svg class="w-6 h-6 text-gray-700" x-show="showMenu" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-cloak>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </div>
-            </div>
-        </nav>
-    </section> -->
-
     <section class="w-full px-6 mb-12 antialiased bg-white select-none">
         <div class="mx-auto max-w-7xl">
             <div class="container max-w-lg py-20 mx-auto text-left md:max-w-none">
@@ -434,37 +391,13 @@
             </p>
         </div>
     </section>
-
-    <script src="<?php echo base_url() . 'assets/js/custom-file-input.js' ?>"></script>
-    <?php $this->load->view('template/footer') ?>
-
-    <script type="text/javascript">
-        feather.replace()
-
-        $(".form-check input[type='radio']").on("change", function() {
-            if ($("#tipe_pengaduan").is(':checked')) {
-                $('.form_pengaduan').removeClass("hidden");
-                $('.form_aspirasi').addClass("hidden");
-            } else if ($("#tipe_aspirasi").is(':checked')) {
-                $('.form_pengaduan').addClass("hidden");
-                $('.form_aspirasi').removeClass("hidden");
-            }
-        });
-
-        $(".show-mobile-header").click(function() {
-            $(".mobile-header").removeClass('hidden');
-        });
-        $(".hide-mobile-header").click(function() {
-            $(".mobile-header").addClass('hidden');
-        });
-
-        $("#show-form-lampiran-pengaduan").click(function() {
-            $(".form-lampiran-pengaduan").slideToggle("fast", function() {});
-        });
-        $("#show-form-lampiran-aspirasi").click(function() {
-            $(".form-lampiran-aspirasi").slideToggle("fast", function() {});
-        });
-    </script>
 </body>
+
+<script src="<?php echo base_url() . 'assets/js/masyarakat/custom-file-input.js' ?>"></script>
+<?php $this->load->view('masyarakat/template/footer') ?>
+
+<script type="text/javascript">
+    feather.replace()
+</script>
 
 </html>
