@@ -6,14 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <?php $this->load->view('masyarakat/template/header') ?>
-
-    <style>
-        body {
-            font-family: 'Mulish', sans-serif;
-        }
-    </style>
-
     <script>
         (function(e, t, n) {
             var r = e.querySelectorAll("html")[0];
@@ -21,10 +13,17 @@
         })(document, window, 0);
     </script>
 
-    <title>Beranda</title>
+    <title><?= $page ?></title>
 </head>
 
 <body>
+    <?php if ($this->session->flashdata('message-success')) { ?>
+        <div id="snackbar">
+            <div class="bg-green-500 shadow-lg text-center p-3 rounded">
+                <?= $this->session->flashdata('message-success'); ?>
+            </div>
+        </div>
+    <?php } ?>
     <section class="w-full antialiased bg-white select-none">
         <div class="relative bg-white border-b-2 border-gray-100">
             <div class="container w-full mx-auto px-6 sm:px-6">
@@ -50,10 +49,10 @@
                     </nav>
                     <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
                         <?php if ($this->session->userdata('status') != "login") { ?>
-                            <a href="<?= site_url('auth') ?>" class="whitespace-nowrap text-base font-medium text-gray-700 hover:text-indigo-600">
+                            <a href="<?= site_url('auth_masyarakat') ?>" class="whitespace-nowrap text-base font-medium text-gray-700 hover:text-indigo-600">
                                 Masuk
                             </a>
-                            <a href="<?= site_url('auth/registration') ?>" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-semibold text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none md:rounded-md lg:ronded-md">
+                            <a href="<?= site_url('auth_masyarakat/registration') ?>" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-semibold text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none md:rounded-md lg:ronded-md">
                                 Daftar
                             </a>
                         <?php } else if ($this->session->userdata('status') == "login") { ?>
@@ -72,12 +71,12 @@
                                             </span>
                                             <br>
                                             <span class="text-xs text-gray-400">
-                                                <?= $user['email'] ?>
+                                                <?= $user['email']; ?>
                                             </span>
                                         </div>
                                         <div>
                                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Laporan Saya</a>
-                                            <a href="<?= site_url('auth/logout') ?>" class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100" role="menuitem">Logout</a>
+                                            <a href="<?= site_url('auth_masyarakat/logout') ?>" class="block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Keluar</a>
                                         </div>
                                     </div>
                                 </template>
@@ -121,12 +120,12 @@
                     </div>
                     <div class="py-6 px-5 space-y-6">
                         <?php if ($this->session->userdata('status') != "login") { ?>
-                            <a href="<?= site_url('auth/registration') ?>" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                            <a href="<?= site_url('auth_masyarakat/registration') ?>" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                                 Daftar
                             </a>
                             <p class="mt-6 text-center text-base font-medium text-gray-500">
                                 Sudah daftar?
-                                <a href="<?= site_url('auth') ?>" class="text-indigo-600 hover:text-indigo-500">
+                                <a href="<?= site_url('auth_masyarakat') ?>" class="text-indigo-600 hover:text-indigo-500">
                                     Masuk
                                 </a>
                             </p>
@@ -148,8 +147,8 @@
                                     <a href="" class="block -m-3 px-3 py-2 text-gray-700 flex rounded-md hover:bg-gray-50">
                                         Laporan Saya
                                     </a>
-                                    <a href="<?= site_url('auth/logout') ?>" class="block -m-3 px-3 py-2 text-red-500 flex rounded-md hover:bg-gray-50">
-                                        Logout
+                                    <a href="<?= site_url('auth_masyarakat/logout') ?>" class="block -m-3 px-3 py-2 flex rounded-md hover:bg-gray-50">
+                                        Keluar
                                     </a>
                                 </div>
                             </div>
@@ -394,10 +393,17 @@
 </body>
 
 <script src="<?php echo base_url() . 'assets/js/masyarakat/custom-file-input.js' ?>"></script>
-<?php $this->load->view('masyarakat/template/footer') ?>
 
 <script type="text/javascript">
-    feather.replace()
+    let alert_success = '<?= $this->session->flashdata('message-success', TRUE); ?>';
+
+    if (alert_success != '') {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function() {
+            x.className = x.className.replace("show", "");
+        }, 3000);
+    }
 </script>
 
 </html>

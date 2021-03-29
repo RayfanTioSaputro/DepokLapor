@@ -7,10 +7,18 @@ class Dasbor extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('masyarakatmodel');
+        $this->load->model('petugasmodel');
     }
 
     public function index()
     {
-        $this->load->view('petugas_&_admin/dasbor');
+        $data['page'] = 'Dasbor';
+        $data['masyarakat'] = $this->masyarakatmodel->getAllRow();
+        $data['petugas'] = $this->petugasmodel->getAllRow();
+
+        $this->load->view('petugas/template/header', $data);
+        $this->load->view('petugas/dasbor', $data);
+        $this->load->view('petugas/template/footer');
     }
 }
