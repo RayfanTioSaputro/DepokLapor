@@ -11,12 +11,12 @@ class MasyarakatModel extends CI_Model
     public function getAll()
     {
         $data = $this->db->query('SELECT * FROM masyarakat');
-        return $data;
+        return $data->result();
     }
 
     public function getAllRow()
     {
-        $data = $this->getAll();
+        $data = $this->db->query('SELECT * FROM masyarakat');
         return $data->num_rows();
     }
 }

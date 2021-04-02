@@ -9,7 +9,6 @@ class Auth_masyarakat extends CI_Controller
         parent::__construct();
 
         $this->load->library('form_validation');
-        $this->load->model('authmodel');
     }
 
     public function index()
@@ -55,7 +54,12 @@ class Auth_masyarakat extends CI_Controller
                         'username' => $user['username'],
                         'password' => $user['password'],
                         'status' => "login",
+                        'role' => "Masyarakat"
                     ];
+
+                    // var_dump($data['role']);
+                    // die;
+
                     $authenticate = $this->db->get_where('masyarakat', ['username' => $username])->row_array();
 
                     $this->session->set_flashdata('message-success', '<div class="text-white text-center capitalize">berhasil masuk sebagai ' . $authenticate['username'] . '</div>');
@@ -106,9 +110,10 @@ class Auth_masyarakat extends CI_Controller
         $this->form_validation->set_rules(
             'email',
             'Email',
-            'trim|required|min_length[1]|max_length[45]',
+            'trim|required|min_length[1]|max_length[45]|is_unique[masyarakat.email]',
             [
                 'min_length' => 'Minimal 1 karakter',
+                'is_unique' => 'Email sudah terdaftar'
             ]
         );
         $this->form_validation->set_rules(
@@ -118,7 +123,7 @@ class Auth_masyarakat extends CI_Controller
             [
                 'min_length' => 'Minimal 5 karakter',
                 'max_length' => 'Maksimal 25 karakter',
-                'is_unique' => 'Username tidak dapat digunakan'
+                'is_unique' => 'Username sudah digunakan'
             ]
         );
         $this->form_validation->set_rules(

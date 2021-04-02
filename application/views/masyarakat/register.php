@@ -12,7 +12,7 @@
         }
     </style>
 
-    <title><?= $page_register ?></title>
+    <title>DepokLapor! - <?= $page_register ?></title>
 </head>
 
 <body>

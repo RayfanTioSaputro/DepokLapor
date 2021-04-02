@@ -101,7 +101,7 @@
         }
     </style>
 
-    <title><?= $page ?></title>
+    <title>DepokLapor! - <?= $page ?></title>
 </head>
 
 <body id="page-top">
@@ -143,8 +143,48 @@
 
             <!-- Heading -->
             <div class="sidebar-heading mb-2">
-                Admin
+                <?php
+                foreach ($level as $l) :
+                ?>
+                    <?php if ($l->level == "Admin") { ?>
+                        Admin
+                    <?php } else if ($l->level == "Petugas") { ?>
+                        Petugas
+                    <?php } ?>
+                <?php
+                endforeach
+                ?>
             </div>
+
+            <!-- Nav Item - Pengajuan Laporan -->
+            <li class="nav-item <?= in_array($page, ["Laporan Pengaduan", "Laporan Aspirasi"]) ? "active" : ""; ?>">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-file-alt"></i>
+                    <span>Pengajuan Laporan</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Tipe Laporan:</h6>
+                        <a class="collapse-item <?= $page == "Laporan Pengaduan" ? "active" : ""; ?>" href="<?= site_url('laporan/pengaduan') ?>">Pengaduan</a>
+                        <a class="collapse-item <?= $page == "Laporan Aspirasi" ? "active" : ""; ?>" href="<?= site_url('laporan/aspirasi') ?>">Aspirasi</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Manajemen Laporan -->
+            <li class="nav-item <?= in_array($page, ["Tujuan Instansi", "Kategori Laporan"]) ? "active" : ""; ?>">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-file-alt"></i>
+                    <span>Manajemenen Laporan</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Manajemen:</h6>
+                        <a class="collapse-item <?= $page == "Tujuan Instansi" ? "active" : ""; ?>" href="<?= site_url('laporan/tujuan_instansi') ?>">Tujuan Instansi</a>
+                        <a class="collapse-item <?= $page == "Kategori Laporan" ? "active" : ""; ?>" href="<?= site_url('laporan/kategori_laporan') ?>">Kategori</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Masyarakat -->
             <li class="nav-item <?= $page == "Masyarakat" ? "active" : ""; ?>">
@@ -160,38 +200,6 @@
                     <i class="fas fa-fw fa-users-cog"></i>
                     <span>Petugas</span>
                 </a>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Divider -->
@@ -357,15 +365,19 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <?= $user['level'] ?>
+                                </span>
                                 <img class="img-profile rounded-circle" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
+                                <span class="dropdown-item" href="#">
+                                    <?= $user['nama'] ?><br>
+                                    <span class="text-black-50" style="font-size: 12px;">
+                                        <?= $user['username'] ?>
+                                    </span>
+                                </span>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

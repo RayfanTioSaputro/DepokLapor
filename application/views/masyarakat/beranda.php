@@ -25,7 +25,7 @@
         </div>
     <?php } ?>
     <section class="w-full antialiased bg-white select-none">
-        <div class="relative bg-white border-b-2 border-gray-100">
+        <div class="relative bg-white">
             <div class="container w-full mx-auto px-6 sm:px-6">
                 <div class="flex justify-between items-center lg:py-6 py-5 md:justify-start md:space-x-10">
                     <div class="flex justify-start lg:w-0 lg:flex-1">
@@ -61,7 +61,7 @@
                             </button>
                             <div x-data="{ open: false }">
                                 <button type="button" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:ring-white" aria-expanded="false" aria-haspopup="true" @click="open = true">
-                                    <img class="h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    <img class="h-9 w-9 rounded-full" src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" alt="">
                                 </button>
                                 <template x-if="open">
                                     <div class="origin-top-right absolute right-0 mr-6 mt-2 w-50 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none divide-y-2 divide-gray-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" @click.away="open = false" x-transition:enter="transition ease-out origin-top-right duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition origin-top-right ease-in duration-100" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90">
@@ -71,12 +71,12 @@
                                             </span>
                                             <br>
                                             <span class="text-xs text-gray-400">
-                                                <?= $user['email']; ?>
+                                                <?= $user['username']; ?>
                                             </span>
                                         </div>
                                         <div>
-                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Laporan Saya</a>
-                                            <a href="<?= site_url('auth_masyarakat/logout') ?>" class="block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Keluar</a>
+                                            <a href="<?= site_url('laporan_saya') ?>" class="block px-4 py-2 text-sm text-gray-700 font-medium hover:bg-gray-100" role="menuitem">Laporan Saya</a>
+                                            <a href="<?= site_url('auth_masyarakat/logout') ?>" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100" role="menuitem">Keluar</a>
                                         </div>
                                     </div>
                                 </template>
@@ -133,21 +133,21 @@
                             <div class="md:hidden" id="mobile-menu">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                        <img class="h-10 w-10 rounded-full" src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" alt="">
                                     </div>
                                     <div class="ml-3">
                                         <div class="text-base font-medium leading-none text-gray-600 mb-1"><?= $user['nama'] ?></div>
-                                        <div class="text-sm font-medium leading-none text-gray-400"><?= $user['email'] ?></div>
+                                        <div class="text-sm font-medium leading-none text-gray-400"><?= $user['username'] ?></div>
                                     </div>
                                     <button class="ml-auto bg-transparent flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:ring-white">
                                         <i class="h6 w-6" data-feather="bell" stroke-width="1.75"></i>
                                     </button>
                                 </div>
                                 <div class="mt-6 grid gap-y-6">
-                                    <a href="" class="block -m-3 px-3 py-2 text-gray-700 flex rounded-md hover:bg-gray-50">
+                                    <a href="<?= site_url('laporan_saya') ?>" class="block -m-3 px-3 py-2 text-gray-700 flex rounded-md font-medium hover:bg-gray-50">
                                         Laporan Saya
                                     </a>
-                                    <a href="<?= site_url('auth_masyarakat/logout') ?>" class="block -m-3 px-3 py-2 flex rounded-md hover:bg-gray-50">
+                                    <a href="<?= site_url('auth_masyarakat/logout') ?>" class="block -m-3 px-3 py-2 flex rounded-md font-medium hover:bg-gray-50">
                                         Keluar
                                     </a>
                                 </div>
@@ -208,116 +208,162 @@
                             </ul>
                         </div>
                         <div class="border border-gray-200 my-6"></div>
-                        <form class="form_pengaduan" action="" method="POST" enctype='multipart/form-data'>
-                            <div class="grid grid-rows-none gap-y-8 mb-12">
-                                <div>
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Judul Laporan</span>
-                                    <input type="text" name="judul_laporan" id="judul_laporan" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" autocomplete="off">
-                                </div>
-                                <div>
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Isi Laporan</span>
-                                    <textarea name="isi_laporan" id="isi_laporan" cols="20" rows="6" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full text-md border border-gray-300 rounded-md"></textarea>
-                                </div>
-                                <div>
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Tujuan Instansi</span>
-                                    <select class="mt-1 relative w-full border border-gray-300 rounded-md p-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-md">
-                                        <option>Silahkan pilih...</option>
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                    </select>
-                                </div>
-                                <div class="grid lg:grid-cols-2 gap-4">
+                        <fieldset <?= $this->session->userdata('status') != "login" ? "disabled" : ""; ?>>
+                            <form class="form_pengaduan" action="<?= base_url('beranda/pengaduan') ?>" method="POST" enctype='multipart/form-data'>
+                                <div class="grid grid-rows-none gap-y-8 mb-12">
                                     <div>
-                                        <span class="block text-lg font-medium text-gray-700 mb-2">Tanggal Kejadian</span>
-                                        <input type="date" name="tanggal_kejadian" id="tanggal_kejadian" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" autocomplete="off">
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Judul Laporan</span>
+                                        <input type="text" name="judul_laporan" id="judul_laporan" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" required autocomplete="off">
+                                        <?= form_error('judul_laporan', '<small class="text-red-500 font-medium">', '</small>'); ?>
                                     </div>
                                     <div>
-                                        <span class="block text-lg font-medium text-gray-700 mb-2">Tempat Kejadian</span>
-                                        <input type="text" name="tempat_kejadian" id="tempat_kejadian" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" autocomplete="off">
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Isi Laporan</span>
+                                        <textarea name="isi_laporan" id="isi_laporan" cols="20" rows="6" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full text-md border border-gray-300 rounded-md" required></textarea>
+                                        <?= form_error('isi_laporan', '<small class="text-red-500 font-medium">', '</small>'); ?>
                                     </div>
-                                </div>
-                                <div class="form-lampiran-pengaduan hidden">
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Lampiran</span>
-                                    <div class="mt-1 flex justify-center pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                        <div class="space-y-1 text-center">
-                                            <i class="mx-auto h-12 w-12 text-gray-300" data-feather="file" stroke-width="0.75"></i>
-                                            <div class="flex text-sm justify-center text-gray-600">
-                                                <input type="file" name="lampiran_pengaduan[]" id="lampiran_pengaduan" class="inputfile" data-multiple-caption="{count} file dipilih" multiple />
-                                                <label for="lampiran_pengaduan" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                                    <span class="text-center">Upload Lampiran</span>
-                                                </label>
+                                    <div>
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Tujuan Instansi</span>
+                                        <select name="tujuan_instansi" class="mt-1 relative w-full border border-gray-300 rounded-md p-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-md" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;" required>
+                                            <option value="">Silahkan pilih...</option>
+                                            <?php
+                                            foreach ($tujuan_instansi as $t) :
+                                            ?>
+                                                <option class="py-2" value="<?= $t->tujuan_instansi ?>"><?= $t->tujuan_instansi ?></option>
+                                            <?php
+                                            endforeach
+                                            ?>
+                                        </select>
+                                        <?= form_error('tujuan_instansi', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                    </div>
+                                    <div class="grid lg:grid-cols-2 gap-4">
+                                        <div>
+                                            <span class="block text-lg font-medium text-gray-700 mb-2">Tanggal Kejadian</span>
+                                            <input type="date" name="tgl_kejadian" id="tanggal_kejadian" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" required autocomplete="off">
+                                            <?= form_error('tgl_kejadian', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                        </div>
+                                        <div>
+                                            <span class="block text-lg font-medium text-gray-700 mb-2">Tempat Kejadian</span>
+                                            <input type="text" name="tempat_kejadian" id="tempat_kejadian" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" required autocomplete="off">
+                                            <?= form_error('tempat_kejadian', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Kategori Laporan</span>
+                                        <select name="kategori_laporan" class="mt-1 relative w-full border border-gray-300 rounded-md p-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-md" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;" required>
+                                            <option value="">Silahkan pilih...</option>
+                                            <?php
+                                            foreach ($kategori_laporan as $k) :
+                                            ?>
+                                                <option class="py-2" value="<?= $k->kategori_laporan ?>"><?= $k->kategori_laporan ?></option>
+                                            <?php
+                                            endforeach
+                                            ?>
+                                            <option class="py-2" value="Kategori Lainnya">Kategori Lainnya</option>
+                                        </select>
+                                        <?= form_error('kategori_laporan', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-lampiran-pengaduan hidden">
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Lampiran</span>
+                                        <div class="mt-1 flex justify-center pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                            <div class="space-y-1 text-center">
+                                                <i class="mx-auto h-12 w-12 text-gray-300" data-feather="file" stroke-width="0.75"></i>
+                                                <div class="flex text-sm justify-center text-gray-600">
+                                                    <input type="file" name="lampiran_pengaduan[]" id="lampiran_pengaduan" class="inputfile" data-multiple-caption="{count} file dipilih" multiple />
+                                                    <label for="lampiran_pengaduan" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                        <span class="text-center">Upload Lampiran</span>
+                                                    </label>
+                                                </div>
+                                                <p class="text-xs text-gray-500">
+                                                    Semua tipe file (max 10MB)
+                                                </p>
                                             </div>
-                                            <p class="text-xs text-gray-500">
-                                                Semua tipe file (max 10MB)
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-between">
-                                <div>
-                                    <label id="show-form-lampiran-pengaduan" class="inline-flex w-full py-4 text-md font-medium leading-4 bg-transparent md:w-auto focus:outline-none rounded-md cursor-pointer">
-                                        <i class="mx-auto h-4 w-4 text-gray-900 mr-2" data-feather="paperclip" stroke-width="0.75"></i>
-                                        Lampiran
-                                    </label>
+                                <div class="flex justify-between">
+                                    <div>
+                                        <label id="show-form-lampiran-pengaduan" class="inline-flex w-full py-4 text-md font-medium leading-4 bg-transparent md:w-auto focus:outline-none rounded-md cursor-pointer">
+                                            <i class="mx-auto h-4 w-4 text-gray-900 mr-2" data-feather="paperclip" stroke-width="0.75"></i>
+                                            Lampiran
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="inline-flex items-center w-full px-6 py-4 text-md font-medium leading-4 text-white transition duration-150 ease-in-out bg-transparent bg-indigo-600 border border-transparent md:px-3 md:w-auto lg:px-5 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 rounded-md">
+                                            Laporkan
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button type="submit" class="inline-flex items-center w-full px-6 py-4 text-md font-medium leading-4 text-white transition duration-150 ease-in-out bg-transparent bg-indigo-600 border border-transparent md:px-3 md:w-auto lg:px-5 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 rounded-md">
-                                        Laporkan
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <form class="form_aspirasi hidden" action="" method="POST" enctype='multipart/form-data'>
-                            <div class="grid grid-rows-none gap-y-8 mb-12">
-                                <div>
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Judul Laporan</span>
-                                    <input type="text" name="judul_laporan" id="judul_laporan" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" autocomplete="off">
-                                </div>
-                                <div>
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Isi Laporan</span>
-                                    <textarea name="isi_laporan" id="isi_laporan" cols="20" rows="6" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full text-md border border-gray-300 rounded-md"></textarea>
-                                </div>
-                                <div>
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Tujuan Instansi</span>
-                                    <select class="mt-1 relative w-full border border-gray-300 rounded-md p-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-md">
-                                        <option>Silahkan pilih...</option>
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                    </select>
-                                </div>
-                                <div class="form-lampiran-aspirasi hidden">
-                                    <span class="block text-lg font-medium text-gray-700 mb-2">Lampiran</span>
-                                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                        <div class="space-y-1 text-center">
-                                            <i class="mx-auto h-12 w-12 text-gray-300" data-feather="file" stroke-width="0.75"></i>
-                                            <div class="flex text-sm justify-center text-gray-600">
-                                                <input type="file" name="lampiran_aspirasi[]" id="lampiran_aspirasi" class="inputfile" data-multiple-caption="{count} file dipilih" multiple />
-                                                <label for="lampiran_aspirasi" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                                    <span class="text-center">Upload Lampiran</span>
-                                                </label>
+                            </form>
+                            <form class="form_aspirasi hidden" action="<?= base_url('beranda/aspirasi') ?>" method="POST" enctype='multipart/form-data'>
+                                <div class="grid grid-rows-none gap-y-8 mb-12">
+                                    <div>
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Judul Laporan</span>
+                                        <input type="text" name="judul_laporan_aspirasi" id="judul_laporan_aspirasi" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full border border-gray-300 text-md rounded-md" autocomplete="off">
+                                        <?= form_error('judul_laporan_aspirasi', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                    </div>
+                                    <div>
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Isi Laporan</span>
+                                        <textarea name="isi_laporan_aspirasi" id="isi_laporan_aspirasi" cols="20" rows="6" class="mt-1 p-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 w-full text-md border border-gray-300 rounded-md"></textarea>
+                                        <?= form_error('isi_laporan_aspirasi', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                    </div>
+                                    <div>
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Tujuan Instansi</span>
+                                        <select name="tujuan_instansi_aspirasi" class="mt-1 relative w-full border border-gray-300 rounded-md p-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-md" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;" required>
+                                            <option value="">Silahkan pilih...</option>
+                                            <?php
+                                            foreach ($tujuan_instansi as $t) :
+                                            ?>
+                                                <option class="py-2" value="<?= $t->tujuan_instansi ?>"><?= $t->tujuan_instansi ?></option>
+                                            <?php
+                                            endforeach
+                                            ?>
+                                        </select>
+                                        <?= form_error('tujuan_instansi_aspirasi', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                    </div>
+                                    <div>
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Kategori Laporan</span>
+                                        <select name="kategori_laporan_aspirasi" class="mt-1 relative w-full border border-gray-300 rounded-md p-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-md" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;" required>
+                                            <option value="">Silahkan pilih...</option>
+                                            <?php
+                                            foreach ($kategori_laporan as $k) :
+                                            ?>
+                                                <option class="py-2" value="<?= $k->kategori_laporan ?>"><?= $k->kategori_laporan ?></option>
+                                            <?php
+                                            endforeach
+                                            ?>
+                                            <option class="py-2" value="Kategori Lainnya">Kategori Lainnya</option>
+                                        </select>
+                                        <?= form_error('kategori_laporan_aspirasi', '<small class="text-red-500 font-medium">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-lampiran-aspirasi hidden">
+                                        <span class="block text-lg font-medium text-gray-700 mb-2">Lampiran</span>
+                                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                            <div class="space-y-1 text-center">
+                                                <i class="mx-auto h-12 w-12 text-gray-300" data-feather="file" stroke-width="0.75"></i>
+                                                <div class="flex text-sm justify-center text-gray-600">
+                                                    <input type="file" name="lampiran_aspirasi[]" id="lampiran_aspirasi" class="inputfile" data-multiple-caption="{count} file dipilih" multiple />
+                                                    <label for="lampiran_aspirasi" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                        <span class="text-center">Upload Lampiran</span>
+                                                    </label>
+                                                </div>
+                                                <p class="text-xs text-gray-500">
+                                                    Semua tipe file (max 10MB)
+                                                </p>
                                             </div>
-                                            <p class="text-xs text-gray-500">
-                                                Semua tipe file (max 10MB)
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-between">
-                                <div>
+                                <div class="flex justify-between">
                                     <label id="show-form-lampiran-aspirasi" class="inline-flex w-full py-4 text-md font-medium leading-4 bg-transparent md:w-auto focus:outline-none rounded-md cursor-pointer">
                                         <i class="mx-auto h-4 w-4 text-gray-900 mr-2" data-feather="paperclip" stroke-width="0.75"></i>
                                         Lampiran
                                     </label>
-                                </div>
-                                <div>
                                     <button type="submit" class="inline-flex items-center w-full px-6 py-4 text-md font-medium leading-4 text-white transition duration-150 ease-in-out bg-transparent bg-indigo-600 border border-transparent md:px-3 md:w-auto lg:px-5 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 rounded-md">
                                         Laporkan
                                     </button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </fieldset>
                     </div>
                 </div>
             </div>
@@ -366,10 +412,6 @@
             </div>
         </div>
     </section>
-
-    <!-- <section class="mb-32">
-        <iframe src="https://streamtape.com/e/ZKqGAdOY2AURzR/" class="w-full" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>
-    </section> -->
 
     <section class="bg-gray-50">
         <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">

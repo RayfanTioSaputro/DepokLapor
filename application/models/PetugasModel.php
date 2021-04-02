@@ -20,15 +20,9 @@ class PetugasModel extends CI_Model
         return $data->num_rows();
     }
 
-    // public function getData()
-    // {
-    //     $data = $this->db->query('SELECT * FROM petugas WHERE id ORDER BY id');
-    //     return $data->result();
-    // }
-
-    public function getById($id)
+    public function getByLevel($level)
     {
-        $data = $this->db->query('SELECT * FROM petugas WHERE id=' . $id);
+        $data = $this->db->query('SELECT level FROM petugas WHERE username=' . '"' . $level . '"');
         return $data->result();
     }
 }
