@@ -5,20 +5,19 @@ use Dompdf\Dompdf;
 
 class Laporan extends CI_Controller
 {
-
     function __construct()
     {
         parent::__construct();
 
-        require 'vendor/autoload.php';
-        $this->dompdf = new Dompdf();
-        $options = $this->dompdf->getOptions();
-        $options->setDefaultFont('Helvetica');
-        $dompdf->setOptions($options);
-
         $this->load->model('laporanmodel');
         $this->load->model('masyarakatmodel');
         $this->load->model('petugasmodel');
+
+        require_once 'application/libraries/dompdf/autoload.inc.php';
+        $dompdf = new Dompdf();
+        $options = $dompdf->getOptions();
+        $options->setDefaultFont('Helvetica');
+        $dompdf->setOptions($options);
     }
 
     public function pengaduan($method = "", $id = "")
